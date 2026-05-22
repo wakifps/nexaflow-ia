@@ -77,11 +77,11 @@ tailwind.config = {
 
 <main>
 <!-- HERO -->
-<section class="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-16 pt-24 pb-16 overflow-hidden bg-[#080810]">
+<section class="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-16 pt-20 pb-12 md:pt-24 md:pb-16 overflow-hidden bg-[#080810]">
   <img src="img/hero-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50 z-0 mix-blend-screen"/>
   <div class="absolute inset-0 bg-gradient-to-b from-[#080810]/70 via-transparent to-[#080810]/90 z-0"></div>
   <!-- badges -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none z-10">
+  <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none z-10">
     <div class="absolute top-1/4 left-10 md:left-32 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
       <span class="material-symbols-outlined text-[#6d28d9] text-base">trending_up</span>
       <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">+50 clientes</span>
@@ -96,15 +96,15 @@ tailwind.config = {
     </div>
   </div>
   <!-- content -->
-  <div class="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+  <div class="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto space-y-5 md:space-y-8">
     <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1f1f28] border border-[#6d28d9]/50 rounded-full">
       <span class="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></span>
       <span class="font-['DM_Sans'] text-xs font-bold text-[#d3bbff] uppercase tracking-widest">Respuesta en menos de 24h</span>
     </div>
-    <h1 class="font-['Bebas_Neue'] text-[48px] md:text-[80px] text-[#e4e1ed] tracking-tighter uppercase leading-none">
+    <h1 class="font-['Bebas_Neue'] text-[34px] sm:text-[48px] md:text-[80px] text-[#e4e1ed] tracking-tighter uppercase leading-none">
       <span id="tw-text">TU NEGOCIO EN<br/>MODO AUTOMÁTICO</span><span class="tw-cursor"></span>
     </h1>
-    <p class="font-['DM_Sans'] text-lg text-[#ccc3d7] max-w-2xl leading-relaxed">
+    <p class="font-['DM_Sans'] text-sm sm:text-lg text-[#ccc3d7] max-w-2xl leading-relaxed">
       Automatización con IA · Webs que convierten · Marketing que escala.<br/>
       Mientras tú duermes, tu negocio trabaja.
     </p>
@@ -120,16 +120,16 @@ tailwind.config = {
 </section>
 
 <!-- SERVICIOS -->
-<section id="servicios" class="py-32 px-4 md:px-16 bg-[#080810]">
+<section id="servicios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
   <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-20 fade">
-      <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase tracking-tight">Tu competencia ya está automatizada. ¿Tú?</h2>
+    <div class="text-center mb-10 md:mb-20 fade">
+      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase tracking-tight">Tu competencia ya está automatizada. ¿Tú?</h2>
       <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Sistemas diseñados para operar sin fricción, liberando tu tiempo para enfocarte en el crecimiento real.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade">
         <div class="h-48 overflow-hidden relative"><img alt="Automatización IA" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-ai.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-8 flex flex-col flex-grow -mt-12 relative z-10">
+        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
           <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">smart_toy</span></div>
           <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Automatización IA</h3>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Conectamos tus herramientas. Eliminamos tareas repetitivas. Desde flujos de emails hasta gestión de CRM sin intervención humana.</p>
@@ -138,7 +138,7 @@ tailwind.config = {
       </div>
       <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade" style="transition-delay:.1s">
         <div class="h-48 overflow-hidden relative"><img alt="Desarrollo Web" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-web.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-8 flex flex-col flex-grow -mt-12 relative z-10">
+        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
           <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">code</span></div>
           <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Desarrollo Web</h3>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Arquitectura digital de alto rendimiento. Sitios rápidos, oscuros y optimizados obsesivamente para la conversión.</p>
@@ -147,7 +147,7 @@ tailwind.config = {
       </div>
       <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade" style="transition-delay:.2s">
         <div class="h-48 overflow-hidden relative"><img alt="Marketing Digital" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-mkt.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-8 flex flex-col flex-grow -mt-12 relative z-10">
+        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
           <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">rocket_launch</span></div>
           <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Marketing Digital</h3>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Estrategias basadas en datos. Adquisición predecible de clientes a través de embudos hiper-optimizados.</p>
@@ -159,13 +159,13 @@ tailwind.config = {
 </section>
 
 <!-- IMPACTO -->
-<section id="impacto" class="w-full bg-[#6d28d9] py-24 px-4 md:px-16">
+<section id="impacto" class="w-full bg-[#6d28d9] py-16 md:py-24 px-4 md:px-16">
   <div class="max-w-[1280px] mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white fade">
-      <div><div class="font-['Bebas_Neue'] text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="98">0</span><span>%</span></div><p class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest opacity-80 mt-1">Retención</p></div>
-      <div><div class="font-['Bebas_Neue'] text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="24">0</span><span>/7</span></div><p class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest opacity-80 mt-1">Soporte IA</p></div>
-      <div><div class="font-['Bebas_Neue'] text-5xl flex justify-center items-end gap-1"><span>+</span><span class="counter" data-target="500">0</span></div><p class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest opacity-80 mt-1">Horas salvadas/mes</p></div>
-      <div><div class="font-['Bebas_Neue'] text-5xl flex justify-center items-end gap-1"><span>x</span><span class="counter" data-target="3">0</span></div><p class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest opacity-80 mt-1">ROI Promedio</p></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center text-white fade">
+      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="98">0</span><span>%</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Retención</p></div>
+      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="24">0</span><span>/7</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Soporte IA</p></div>
+      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span>+</span><span class="counter" data-target="500">0</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Horas/mes</p></div>
+      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span>x</span><span class="counter" data-target="3">0</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">ROI Promedio</p></div>
     </div>
     <div class="mt-16 pt-10 border-t border-white/20 flex flex-wrap justify-center gap-12 opacity-50 hover:opacity-100 transition-opacity duration-500 fade">
       <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">OpenAI</span>
@@ -178,14 +178,14 @@ tailwind.config = {
 </section>
 
 <!-- TESTIMONIOS -->
-<section id="testimonios" class="py-32 px-4 md:px-16 bg-[#080810] border-y border-[#4a4455]/30">
+<section id="testimonios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810] border-y border-[#4a4455]/30">
   <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-20 fade">
-      <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase">Testimonios</h2>
+    <div class="text-center mb-10 md:mb-20 fade">
+      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Testimonios</h2>
       <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Lo que dicen los líderes de la industria sobre nuestros sistemas.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-[#1b1b23] p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors">
+      <div class="bg-[#1b1b23] p-6 md:p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors">
         <span class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
         <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"La implementación de automatizaciones con NexaFlow transformó completamente nuestras operaciones. Redujimos el trabajo manual drásticamente y aceleramos nuestro crecimiento mensual."</p>
         <div class="flex items-center gap-4">
@@ -214,9 +214,9 @@ tailwind.config = {
 </section>
 
 <!-- PROCESO -->
-<section id="proceso" class="py-32 px-4 md:px-16 bg-[#080810]">
+<section id="proceso" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
   <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-24 fade">
+    <div class="text-center mb-12 md:mb-24 fade">
       <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase">Arquitectura del éxito</h2>
       <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Un proceso metódico. Sin improvisaciones.</p>
     </div>
@@ -224,24 +224,24 @@ tailwind.config = {
       <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-[#292932] z-0">
         <div id="proc-line" class="absolute top-0 left-0 h-full bg-[#6d28d9] w-0 transition-all duration-1000"></div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 relative z-10">
         <div class="flex flex-col items-center md:items-start text-center md:text-left fade">
-          <div class="w-24 h-24 rounded-full bg-[#34343d] border-2 border-[#6d28d9] flex items-center justify-center font-['Bebas_Neue'] text-5xl text-[#d3bbff] mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">01</div>
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#34343d] border-2 border-[#6d28d9] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#d3bbff] mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">01</div>
           <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Auditoría Profunda</h4>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Analizamos tus cuellos de botella y mapeamos el flujo de datos exacto.</p>
         </div>
         <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.1s">
-          <div class="w-24 h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">02</div>
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">02</div>
           <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Diseño del Sistema</h4>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Arquitectamos la solución ideal con las mejores herramientas del stack moderno.</p>
         </div>
         <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.2s">
-          <div class="w-24 h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">03</div>
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">03</div>
           <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Implementación</h4>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Despliegue silencioso y preciso. Sin interrumpir tus operaciones actuales.</p>
         </div>
         <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.3s">
-          <div class="w-24 h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">04</div>
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">04</div>
           <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Escalabilidad</h4>
           <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Monitoreo continuo y optimización algorítmica para crecimiento infinito.</p>
         </div>
@@ -251,75 +251,75 @@ tailwind.config = {
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-32 px-4 md:px-16 bg-[#1b1b23] border-y border-[#4a4455]/30">
+<section id="faq" class="py-16 md:py-32 px-4 md:px-16 bg-[#1b1b23] border-y border-[#4a4455]/30">
   <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-16 fade">
-      <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase">Preguntas Frecuentes</h2>
+    <div class="text-center mb-10 md:mb-16 fade">
+      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Preguntas Frecuentes</h2>
     </div>
     <div class="space-y-4">
       <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors">
-        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors">¿Cuánto tiempo toma implementar una automatización básica?</span>
+        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Cuánto tiempo toma implementar una automatización básica?</span>
           <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
         </button>
-        <div class="faq-body px-6"><p class="font-['DM_Sans'] text-base text-[#ccc3d7] pb-6">Un flujo inicial de captura y nutrición de leads puede estar operativo en 7 a 14 días laborables tras la auditoría inicial.</p></div>
+        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Un flujo inicial de captura y nutrición de leads puede estar operativo en 7 a 14 días laborables tras la auditoría inicial.</p></div>
       </div>
       <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors" style="transition-delay:.05s">
-        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors">¿Necesito conocimientos técnicos previos?</span>
+        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Necesito conocimientos técnicos previos?</span>
           <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
         </button>
-        <div class="faq-body px-6"><p class="font-['DM_Sans'] text-base text-[#ccc3d7] pb-6">Absolutamente no. Construimos la infraestructura "bajo el capó" y te entregamos un panel de control intuitivo.</p></div>
+        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Absolutamente no. Construimos la infraestructura "bajo el capó" y te entregamos un panel de control intuitivo.</p></div>
       </div>
       <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors" style="transition-delay:.1s">
-        <button class="faq-btn w-full text-left px-6 py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors">¿Qué herramientas integráis?</span>
+        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Qué herramientas integráis?</span>
           <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
         </button>
-        <div class="faq-body px-6"><p class="font-['DM_Sans'] text-base text-[#ccc3d7] pb-6">Make, Zapier, Webflow, Shopify, HubSpot, APIs custom y modelos como GPT-4 según lo que exija el proyecto.</p></div>
+        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Make, Zapier, Webflow, Shopify, HubSpot, APIs custom y modelos como GPT-4 según lo que exija el proyecto.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA FINAL -->
-<section class="min-h-[600px] flex flex-col justify-center items-center text-center px-4 md:px-16 bg-[#080810] relative overflow-hidden">
+<section class="py-20 md:min-h-[600px] flex flex-col justify-center items-center text-center px-4 md:px-16 bg-[#080810] relative overflow-hidden">
   <div class="absolute inset-0 bg-[#6d28d9]/5 pointer-events-none"></div>
   <div class="relative z-10 flex flex-col items-center fade">
-    <h2 class="font-['Bebas_Neue'] text-[64px] md:text-[112px] leading-none text-[#e4e1ed] uppercase mb-8">
+    <h2 class="font-['Bebas_Neue'] text-[36px] sm:text-[54px] md:text-[112px] leading-none text-[#e4e1ed] uppercase mb-6 md:mb-8">
       ¿LISTO PARA<br/><span class="text-[#6d28d9] drop-shadow-[0_0_20px_rgba(109,40,217,0.5)]">ESCALAR?</span>
     </h2>
     <p class="font-['DM_Sans'] text-lg text-[#ccc3d7] max-w-xl mb-12">Agenda una consulta estratégica gratuita de 30 minutos y te diremos exactamente dónde estás perdiendo dinero.</p>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="px-12 py-5 bg-[#6d28d9] text-white font-['DM_Sans'] text-lg font-bold uppercase tracking-widest rounded hover:scale-105 transition-transform shadow-[0_0_30px_rgba(109,40,217,0.4)]">Consulta Gratis</a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="px-8 py-4 md:px-12 md:py-5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm md:text-lg font-bold uppercase tracking-widest rounded hover:scale-105 transition-transform shadow-[0_0_30px_rgba(109,40,217,0.4)]">Consulta Gratis</a>
   </div>
 </section>
 
 <!-- CONTACTO -->
-<section id="contacto-section" class="py-24 px-4 md:px-16 bg-[#080810]">
+<section id="contacto-section" class="py-16 md:py-24 px-4 md:px-16 bg-[#080810]">
   <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-16 fade">
-      <h2 class="font-['Bebas_Neue'] text-[48px] text-[#e4e1ed] uppercase">CONTACTO</h2>
+    <div class="text-center mb-10 md:mb-16 fade">
+      <h2 class="font-['Bebas_Neue'] text-[36px] md:text-[48px] text-[#e4e1ed] uppercase">CONTACTO</h2>
       <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7]">Conecta con nosotros para empezar a escalar tu negocio.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="flex flex-col items-center p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
         <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">mail</span>
         <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Gmail</span>
         <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">yosoynexaflow@gmail.com</span>
       </a>
-      <a href="https://wa.me/34651104555" target="_blank" class="flex flex-col items-center p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+      <a href="https://wa.me/34651104555" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
         <svg class="w-10 h-10 text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
         <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">WhatsApp</span>
         <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">+34 651 10 45 55</span>
       </a>
-      <a href="https://instagram.com/nexaflow_ia" target="_blank" class="flex flex-col items-center p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+      <a href="https://instagram.com/nexaflow_ia" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
         <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">alternate_email</span>
         <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Instagram</span>
         <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@nexaflow_ia</span>
       </a>
-      <a href="https://instagram.com/javigonzaaalez_" target="_blank" class="flex flex-col items-center p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+      <a href="https://instagram.com/javigonzaaalez_" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
         <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">person</span>
         <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">CEO Instagram</span>
         <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@javigonzaaalez_</span>
@@ -330,7 +330,7 @@ tailwind.config = {
 </main>
 
 <!-- FOOTER -->
-<footer class="py-16 px-4 md:px-16 bg-[#080810] border-t border-[#4a4455]/30">
+<footer class="py-10 md:py-16 px-4 md:px-16 bg-[#080810] border-t border-[#4a4455]/30">
   <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
     <div class="font-['Bebas_Neue'] text-3xl text-[#6d28d9]">NEXAFLOW</div>
     <div class="flex gap-6 flex-wrap justify-center">
@@ -353,7 +353,7 @@ tailwind.config = {
       <h3 class="font-['Bebas_Neue'] text-3xl text-[#e4e1ed] uppercase">Términos y Condiciones</h3>
       <button id="close-terms" class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors"><span class="material-symbols-outlined text-2xl">close</span></button>
     </div>
-    <div class="p-8 space-y-6 font-['DM_Sans'] text-base text-[#ccc3d7]">
+    <div class="p-5 md:p-8 space-y-5 md:space-y-6 font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7]">
       <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">1. Aceptación</h4><p>Al acceder a los servicios de NexaFlow, el usuario acepta estos Términos y Condiciones.</p></div>
       <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">2. Servicios</h4><p>NexaFlow provee automatización con IA, desarrollo web y estrategias de marketing digital.</p></div>
       <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">3. Propiedad Intelectual</h4><p>Código, flujos y metodologías desarrolladas son propiedad de NexaFlow salvo acuerdo escrito.</p></div>
