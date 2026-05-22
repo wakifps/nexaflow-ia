@@ -1,690 +1,1009 @@
 <!DOCTYPE html>
 <html class="dark scroll-smooth" lang="es">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NexaFlow | Automatización con IA</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
-tailwind.config = {
-  darkMode:"class",
-  theme:{extend:{colors:{"primary":"#d3bbff","on-surface":"#e4e1ed","surface-container":"#1f1f28","surface-container-low":"#1b1b23","surface-container-high":"#292932","surface-container-highest":"#34343d","surface-container-lowest":"#0d0d16","surface-dim":"#13131b","surface":"#13131b","on-surface-variant":"#ccc3d7","primary-container":"#6d28d9","on-primary-container":"#dac5ff","on-primary":"#3f008d","outline-variant":"#4a4455","outline":"#958da1","secondary-container":"#571bc1","on-secondary-container":"#c4abff","tertiary-container":"#5c4f8f","background":"#13131b","on-background":"#e4e1ed"},spacing:{"margin-desktop":"64px","gutter":"24px","container-max":"1280px","margin-mobile":"16px"},fontFamily:{"sans":["DM Sans","sans-serif"],"display":["Bebas Neue","sans-serif"]}}}
-}
-</script>
-<style>
-  body{background:#080810;color:#e4e1ed;cursor:none}
-  .cursor-dot{width:8px;height:8px;background:#6d28d9;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-  .cursor-ring{width:36px;height:36px;border:1.5px solid #6d28d9;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-  .clip-hex{clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
-  .glow:hover{box-shadow:0 0 20px -5px #6d28d9;border-color:#6d28d9!important;transform:scale(1.02);z-index:10;transition:box-shadow .3s,border-color .3s,transform .2s}
-  .fade{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-  .fade.on{opacity:1;transform:none}
-  .tw-cursor{display:inline-block;width:3px;height:.9em;background:#6d28d9;animation:blink 1s step-end infinite;vertical-align:text-bottom;margin-left:2px}
-  @keyframes blink{50%{opacity:0}}
-  .faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .modal-wrap{opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-  .modal-wrap.open{opacity:1;visibility:visible}
-  .modal-box{transform:scale(.95);opacity:0;transition:transform .3s,opacity .3s}
-  .modal-wrap.open .modal-box{transform:scale(1);opacity:1}
-  #mobile-nav{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  #mobile-nav.open{max-height:400px}
-</style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>NexaFlow | Automatización con IA</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: { extend: { colors: { "primary": "#d3bbff", "on-surface": "#e4e1ed", "surface-container": "#1f1f28", "surface-container-low": "#1b1b23", "surface-container-high": "#292932", "surface-container-highest": "#34343d", "surface-container-lowest": "#0d0d16", "surface-dim": "#13131b", "surface": "#13131b", "on-surface-variant": "#ccc3d7", "primary-container": "#6d28d9", "on-primary-container": "#dac5ff", "on-primary": "#3f008d", "outline-variant": "#4a4455", "outline": "#958da1", "secondary-container": "#571bc1", "on-secondary-container": "#c4abff", "tertiary-container": "#5c4f8f", "background": "#13131b", "on-background": "#e4e1ed" }, spacing: { "margin-desktop": "64px", "gutter": "24px", "container-max": "1280px", "margin-mobile": "16px" }, fontFamily: { "sans": ["DM Sans", "sans-serif"], "display": ["Bebas Neue", "sans-serif"] } } }
+    }
+  </script>
+  <style>
+    body {
+      background: #080810;
+      color: #e4e1ed;
+      cursor: none
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #6d28d9;
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%)
+    }
+
+    .cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid #6d28d9;
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .2s, height .2s
+    }
+
+    .clip-hex {
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)
+    }
+
+    .glow:hover {
+      box-shadow: 0 0 20px -5px #6d28d9;
+      border-color: #6d28d9 !important;
+      transform: scale(1.02);
+      z-index: 10;
+      transition: box-shadow .3s, border-color .3s, transform .2s
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .fade.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .tw-cursor {
+      display: inline-block;
+      width: 3px;
+      height: .9em;
+      background: #6d28d9;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0
+      }
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease
+    }
+
+    .modal-wrap {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s, visibility .3s
+    }
+
+    .modal-wrap.open {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .modal-box {
+      transform: scale(.95);
+      opacity: 0;
+      transition: transform .3s, opacity .3s
+    }
+
+    .modal-wrap.open .modal-box {
+      transform: scale(1);
+      opacity: 1
+    }
+
+    #mobile-nav {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease
+    }
+
+    #mobile-nav.open {
+      max-height: 400px
+    }
+  </style>
 </head>
+
 <body class="overflow-x-hidden">
 
-<!-- cursor -->
-<div class="cursor-dot" id="cd"></div>
-<div class="cursor-ring" id="cr"></div>
+  <!-- cursor -->
+  <div class="cursor-dot" id="cd"></div>
+  <div class="cursor-ring" id="cr"></div>
 
-<!-- NAV -->
-<nav id="navbar" class="fixed top-0 w-full z-50 bg-[#080810]/80 backdrop-blur-md border-b border-[#4a4455]/30 px-4 md:px-16 transition-all">
-  <div class="flex justify-between items-center h-20 max-w-[1280px] mx-auto">
-    <a href="#" class="flex items-center gap-2 font-['Bebas_Neue'] text-3xl text-[#d3bbff] hover:scale-105 transition-transform">
-      <span class="material-symbols-outlined clip-hex bg-[#6d28d9] text-white p-1 text-xl" style="font-variation-settings:'FILL' 1">hexagon</span>
-      NEXAFLOW
-    </a>
-    <div class="hidden md:flex items-center gap-5 lg:gap-7">
-      <a href="#servicios" class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Servicios</a>
-      <a href="#impacto"   class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Impacto</a>
-      <a href="#testimonios" class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Testimonios</a>
-      <a href="#proceso"   class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Proceso</a>
-      <a href="#faq"       class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">FAQ</a>
-      <a href="#consultas" class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Consultas</a>
-      <a href="#contacto-section" class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Contacto</a>
-    </div>
-    <div class="flex items-center gap-3">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded hover:scale-105 transition-transform">
-        EMPEZAR <span class="material-symbols-outlined text-base">arrow_forward</span>
+  <!-- NAV -->
+  <nav id="navbar"
+    class="fixed top-0 w-full z-50 bg-[#080810]/80 backdrop-blur-md border-b border-[#4a4455]/30 px-4 md:px-16 transition-all">
+    <div class="flex justify-between items-center h-20 max-w-[1280px] mx-auto">
+      <a href="#"
+        class="flex items-center gap-2 font-['Bebas_Neue'] text-3xl text-[#d3bbff] hover:scale-105 transition-transform">
+        <span class="material-symbols-outlined clip-hex bg-[#6d28d9] text-white p-1 text-xl"
+          style="font-variation-settings:'FILL' 1">hexagon</span>
+        NEXAFLOW
       </a>
-      <button id="mob-btn" class="md:hidden text-[#d3bbff] p-2"><span class="material-symbols-outlined" id="mob-icon">menu</span></button>
-    </div>
-  </div>
-  <div id="mobile-nav">
-    <div class="flex flex-col gap-4 pb-6 pt-4 border-t border-[#4a4455]/30 max-w-[1280px] mx-auto">
-      <a href="#servicios" class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Servicios</a>
-      <a href="#impacto"   class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Impacto</a>
-      <a href="#testimonios" class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Testimonios</a>
-      <a href="#proceso"   class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Proceso</a>
-      <a href="#faq"       class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">FAQ</a>
-      <a href="#consultas" class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#6d28d9] hover:text-[#d3bbff]">Consultas</a>
-      <a href="#contacto-section" class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Contacto</a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="px-5 py-2.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center">EMPEZAR</a>
-    </div>
-  </div>
-</nav>
-
-<main>
-<!-- HERO -->
-<section class="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-16 pt-20 pb-12 md:pt-24 md:pb-16 overflow-hidden bg-[#080810]">
-  <img src="img/hero-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50 z-0 mix-blend-screen"/>
-  <div class="absolute inset-0 bg-gradient-to-b from-[#080810]/70 via-transparent to-[#080810]/90 z-0"></div>
-  <!-- badges -->
-  <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none z-10">
-    <div class="absolute top-1/4 left-10 md:left-32 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
-      <span class="material-symbols-outlined text-[#6d28d9] text-base">trending_up</span>
-      <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">+50 clientes</span>
-    </div>
-    <div class="absolute top-1/3 right-5 md:right-24 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
-      <span class="material-symbols-outlined text-[#6d28d9] text-base">group_add</span>
-      <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">3x más leads</span>
-    </div>
-    <div class="absolute bottom-1/3 left-5 md:left-40 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
-      <span class="material-symbols-outlined text-[#6d28d9] text-base">timer_off</span>
-      <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">-70% trabajo manual</span>
-    </div>
-  </div>
-  <!-- content -->
-  <div class="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto space-y-5 md:space-y-8">
-    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1f1f28] border border-[#6d28d9]/50 rounded-full">
-      <span class="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></span>
-      <span class="font-['DM_Sans'] text-xs font-bold text-[#d3bbff] uppercase tracking-widest">Respuesta en menos de 24h</span>
-    </div>
-    <h1 class="font-['Bebas_Neue'] text-[34px] sm:text-[48px] md:text-[80px] text-[#e4e1ed] tracking-tighter uppercase leading-none">
-      <span id="tw-text">TU NEGOCIO EN<br/>MODO AUTOMÁTICO</span><span class="tw-cursor"></span>
-    </h1>
-    <p class="font-['DM_Sans'] text-sm sm:text-lg text-[#ccc3d7] max-w-2xl leading-relaxed">
-      Automatización con IA · Webs que convierten · Marketing que escala.<br/>
-      Mientras tú duermes, tu negocio trabaja.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-      <a href="#servicios" class="px-8 py-4 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(109,40,217,0.4)]">Ver servicios</a>
-      <button id="open-contact" class="px-8 py-4 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Hablar con nosotros</button>
-    </div>
-  </div>
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 z-20">
-    <span class="font-['DM_Sans'] text-[10px] text-[#ccc3d7] uppercase tracking-widest">Scroll</span>
-    <div class="w-px h-12 bg-gradient-to-b from-[#6d28d9] to-transparent animate-bounce"></div>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section id="servicios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-10 md:mb-20 fade">
-      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase tracking-tight">Tu competencia ya está automatizada. ¿Tú?</h2>
-      <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Sistemas diseñados para operar sin fricción, liberando tu tiempo para enfocarte en el crecimiento real.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade">
-        <div class="h-48 overflow-hidden relative"><img alt="Automatización IA" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-ai.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
-          <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">smart_toy</span></div>
-          <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Automatización IA</h3>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Conectamos tus herramientas. Eliminamos tareas repetitivas. Desde flujos de emails hasta gestión de CRM sin intervención humana.</p>
-          <a href="#" class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Explorar flujos <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-        </div>
+      <div class="hidden md:flex items-center gap-5 lg:gap-7">
+        <a href="#servicios"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Servicios</a>
+        <a href="#impacto"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Impacto</a>
+        <a href="#testimonios"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Testimonios</a>
+        <a href="#proceso"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Proceso</a>
+        <a href="#faq"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">FAQ</a>
+        <a href="#consultas"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Consultas</a>
+        <a href="#contacto-section"
+          class="font-['DM_Sans'] text-sm font-bold tracking-widest uppercase text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Contacto</a>
       </div>
-      <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade" style="transition-delay:.1s">
-        <div class="h-48 overflow-hidden relative"><img alt="Desarrollo Web" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-web.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
-          <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">code</span></div>
-          <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Desarrollo Web</h3>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Arquitectura digital de alto rendimiento. Sitios rápidos, oscuros y optimizados obsesivamente para la conversión.</p>
-          <a href="#" class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Ver portafolio <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-        </div>
-      </div>
-      <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade" style="transition-delay:.2s">
-        <div class="h-48 overflow-hidden relative"><img alt="Marketing Digital" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="img/card-mkt.jpg"/><div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div></div>
-        <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
-          <div class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]"><span class="material-symbols-outlined text-[#6d28d9]">rocket_launch</span></div>
-          <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Marketing Digital</h3>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Estrategias basadas en datos. Adquisición predecible de clientes a través de embudos hiper-optimizados.</p>
-          <a href="#" class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Conocer método <span class="material-symbols-outlined text-base">arrow_forward</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMPACTO -->
-<section id="impacto" class="w-full bg-[#6d28d9] py-16 md:py-24 px-4 md:px-16">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center text-white fade">
-      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="98">0</span><span>%</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Retención</p></div>
-      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span class="counter" data-target="24">0</span><span>/7</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Soporte IA</p></div>
-      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span>+</span><span class="counter" data-target="500">0</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">Horas/mes</p></div>
-      <div><div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span>x</span><span class="counter" data-target="3">0</span></div><p class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">ROI Promedio</p></div>
-    </div>
-    <div class="mt-16 pt-10 border-t border-white/20 flex flex-wrap justify-center gap-12 opacity-50 hover:opacity-100 transition-opacity duration-500 fade">
-      <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">OpenAI</span>
-      <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Make</span>
-      <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Webflow</span>
-      <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Meta</span>
-      <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Google</span>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section id="testimonios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810] border-y border-[#4a4455]/30">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-10 md:mb-20 fade">
-      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Testimonios</h2>
-      <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Lo que dicen los líderes de la industria sobre nuestros sistemas.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-[#1b1b23] p-6 md:p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors">
-        <span class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
-        <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"La implementación de automatizaciones con NexaFlow transformó completamente nuestras operaciones. Redujimos el trabajo manual drásticamente y aceleramos nuestro crecimiento mensual."</p>
-        <div class="flex items-center gap-4">
-          <img alt="Carlos M." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]" src="img/avatar1.jpg"/>
-          <div><h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Carlos M.</h4><span class="text-sm text-[#ccc3d7]">Director Ejecutivo</span></div>
-        </div>
-      </div>
-      <div class="bg-[#1b1b23] p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors" style="transition-delay:.1s">
-        <span class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
-        <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"Nuestra nueva plataforma digital es impecable. Un diseño oscuro, elegante y optimizada obsesivamente para la conversión. El nivel de detalle es insuperable."</p>
-        <div class="flex items-center gap-4">
-          <img alt="Laura P." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]" src="img/avatar2.jpg"/>
-          <div><h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Laura P.</h4><span class="text-sm text-[#ccc3d7]">Fundadora &amp; Creativa</span></div>
-        </div>
-      </div>
-      <div class="bg-[#1b1b23] p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors" style="transition-delay:.2s">
-        <span class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
-        <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"Las estrategias basadas en datos que implementaron nos dieron un ROI claro y predecible desde el primer mes."</p>
-        <div class="flex items-center gap-4">
-          <img alt="Marcos T." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]" src="img/avatar3.jpg"/>
-          <div><h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Marcos T.</h4><span class="text-sm text-[#ccc3d7]">CEO Tech Startup</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESO -->
-<section id="proceso" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
-  <div class="max-w-[1280px] mx-auto">
-    <div class="text-center mb-12 md:mb-24 fade">
-      <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase">Arquitectura del éxito</h2>
-      <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Un proceso metódico. Sin improvisaciones.</p>
-    </div>
-    <div class="relative">
-      <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-[#292932] z-0">
-        <div id="proc-line" class="absolute top-0 left-0 h-full bg-[#6d28d9] w-0 transition-all duration-1000"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 relative z-10">
-        <div class="flex flex-col items-center md:items-start text-center md:text-left fade">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#34343d] border-2 border-[#6d28d9] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#d3bbff] mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">01</div>
-          <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Auditoría Profunda</h4>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Analizamos tus cuellos de botella y mapeamos el flujo de datos exacto.</p>
-        </div>
-        <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.1s">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">02</div>
-          <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Diseño del Sistema</h4>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Arquitectamos la solución ideal con las mejores herramientas del stack moderno.</p>
-        </div>
-        <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.2s">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">03</div>
-          <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Implementación</h4>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Despliegue silencioso y preciso. Sin interrumpir tus operaciones actuales.</p>
-        </div>
-        <div class="flex flex-col items-center md:items-start text-center md:text-left fade" style="transition-delay:.3s">
-          <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">04</div>
-          <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Escalabilidad</h4>
-          <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Monitoreo continuo y optimización algorítmica para crecimiento infinito.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="py-16 md:py-32 px-4 md:px-16 bg-[#1b1b23] border-y border-[#4a4455]/30">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-10 md:mb-16 fade">
-      <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Preguntas Frecuentes</h2>
-    </div>
-    <div class="space-y-4">
-      <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors">
-        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Cuánto tiempo toma implementar una automatización básica?</span>
-          <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
+      <div class="flex items-center gap-3">
+        <button id="open-contact-nav"
+          class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded hover:scale-105 transition-transform">
+          EMPEZAR <span class="material-symbols-outlined text-base">arrow_forward</span>
         </button>
-        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Un flujo inicial de captura y nutrición de leads puede estar operativo en 7 a 14 días laborables tras la auditoría inicial.</p></div>
-      </div>
-      <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors" style="transition-delay:.05s">
-        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Necesito conocimientos técnicos previos?</span>
-          <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
-        </button>
-        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Absolutamente no. Construimos la infraestructura "bajo el capó" y te entregamos un panel de control intuitivo.</p></div>
-      </div>
-      <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors" style="transition-delay:.1s">
-        <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
-          <span class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Qué herramientas integráis?</span>
-          <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
-        </button>
-        <div class="faq-body px-4 md:px-6"><p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Make, Zapier, Webflow, Shopify, HubSpot, APIs custom y modelos como GPT-4 según lo que exija el proyecto.</p></div>
+        <button id="mob-btn" class="md:hidden text-[#d3bbff] p-2"><span class="material-symbols-outlined"
+            id="mob-icon">menu</span></button>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="py-20 md:min-h-[600px] flex flex-col justify-center items-center text-center px-4 md:px-16 bg-[#080810] relative overflow-hidden">
-  <div class="absolute inset-0 bg-[#6d28d9]/5 pointer-events-none"></div>
-  <div class="relative z-10 flex flex-col items-center fade">
-    <h2 class="font-['Bebas_Neue'] text-[36px] sm:text-[54px] md:text-[112px] leading-none text-[#e4e1ed] uppercase mb-6 md:mb-8">
-      ¿LISTO PARA<br/><span class="text-[#6d28d9] drop-shadow-[0_0_20px_rgba(109,40,217,0.5)]">ESCALAR?</span>
-    </h2>
-    <p class="font-['DM_Sans'] text-lg text-[#ccc3d7] max-w-xl mb-12">Agenda una consulta estratégica gratuita de 30 minutos y te diremos exactamente dónde estás perdiendo dinero.</p>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="px-8 py-4 md:px-12 md:py-5 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm md:text-lg font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Consulta Gratis</a>
-  </div>
-</section>
-
-<!-- CONSULTAS -->
-<section id="consultas" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
-  <div class="max-w-3xl mx-auto">
-
-    <div class="text-center mb-10 md:mb-16 fade">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1f1f28] border border-[#6d28d9]/50 rounded-full mb-4">
-        <span class="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></span>
-        <span class="font-['DM_Sans'] text-xs font-bold text-[#d3bbff] uppercase tracking-widest">Atención personalizada</span>
+    <div id="mobile-nav">
+      <div class="flex flex-col gap-4 pb-6 pt-4 border-t border-[#4a4455]/30 max-w-[1280px] mx-auto">
+        <a href="#servicios"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Servicios</a>
+        <a href="#impacto"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Impacto</a>
+        <a href="#testimonios"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Testimonios</a>
+        <a href="#proceso"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Proceso</a>
+        <a href="#faq"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">FAQ</a>
+        <a href="#consultas"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#6d28d9] hover:text-[#d3bbff]">Consultas</a>
+        <a href="#contacto-section"
+          class="font-['DM_Sans'] text-sm font-bold uppercase tracking-widest text-[#ccc3d7] hover:text-[#6d28d9]">Contacto</a>
+        <button id="open-contact-mob"
+          class="px-5 py-2.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center">EMPEZAR</button>
       </div>
-      <h2 class="font-['Bebas_Neue'] text-[32px] md:text-[48px] text-[#e4e1ed] uppercase">ENVÍANOS TU CONSULTA</h2>
-      <p class="mt-4 font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] max-w-xl mx-auto">Cuéntanos tu proyecto y te respondemos en menos de 24 horas con una propuesta a medida.</p>
     </div>
+  </nav>
 
-    <form id="consulta-form" class="bg-[#0c0c18] border border-[#1c1c2e] rounded-lg p-6 md:p-10 space-y-6 fade glow" novalidate>
-
-      <!-- Fila 1: Nombre + Email -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div class="flex flex-col gap-1.5">
-          <label for="cf-name" class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Nombre completo <span class="text-[#6d28d9]">*</span></label>
-          <input id="cf-name" type="text" placeholder="Tu nombre" autocomplete="name"
-            class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
-          <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Este campo es obligatorio.</span>
+  <main>
+    <!-- HERO -->
+    <section
+      class="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-16 pt-20 pb-12 md:pt-24 md:pb-16 overflow-hidden bg-[#080810]">
+      <img src="img/hero-bg.jpg" alt=""
+        class="absolute inset-0 w-full h-full object-cover opacity-50 z-0 mix-blend-screen" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[#080810]/70 via-transparent to-[#080810]/90 z-0"></div>
+      <!-- badges -->
+      <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none z-10">
+        <div
+          class="absolute top-1/4 left-10 md:left-32 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
+          <span class="material-symbols-outlined text-[#6d28d9] text-base">trending_up</span>
+          <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">+50 clientes</span>
         </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="cf-email" class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Email <span class="text-[#6d28d9]">*</span></label>
-          <input id="cf-email" type="email" placeholder="tu@email.com" autocomplete="email"
-            class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
-          <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Introduce un email válido.</span>
+        <div
+          class="absolute top-1/3 right-5 md:right-24 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
+          <span class="material-symbols-outlined text-[#6d28d9] text-base">group_add</span>
+          <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">3x más leads</span>
+        </div>
+        <div
+          class="absolute bottom-1/3 left-5 md:left-40 px-4 py-2 bg-[#1f1f28] border border-[#6d28d9]/40 rounded-full flex items-center gap-2 shadow-[0_0_15px_rgba(109,40,217,0.2)]">
+          <span class="material-symbols-outlined text-[#6d28d9] text-base">timer_off</span>
+          <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">-70% trabajo manual</span>
         </div>
       </div>
-
-      <!-- Fila 2: Teléfono + Servicio -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div class="flex flex-col gap-1.5">
-          <label for="cf-phone" class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Teléfono <span class="font-normal normal-case tracking-normal text-[#ccc3d7]/40 text-xs">(opcional)</span></label>
-          <input id="cf-phone" type="tel" placeholder="+34 600 000 000" autocomplete="tel"
-            class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
+      <!-- content -->
+      <div class="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto space-y-5 md:space-y-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1f1f28] border border-[#6d28d9]/50 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></span>
+          <span class="font-['DM_Sans'] text-xs font-bold text-[#d3bbff] uppercase tracking-widest">Respuesta en menos
+            de 24h</span>
         </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="cf-service" class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Servicio de interés <span class="text-[#6d28d9]">*</span></label>
-          <div class="relative">
-            <select id="cf-service"
-              class="w-full bg-[#080810] border border-[#1c1c2e] text-[#4a4455] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors appearance-none cursor-pointer hover:border-[#6d28d9]/50 focus:border-[#6d28d9]">
-              <option value="" disabled selected>Selecciona un servicio…</option>
-              <option value="Automatización IA">Automatización IA</option>
-              <option value="Desarrollo Web">Desarrollo Web</option>
-              <option value="Marketing Digital">Marketing Digital</option>
-              <option value="Pack Completo">Pack Completo</option>
-            </select>
-            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#ccc3d7] pointer-events-none text-base">expand_more</span>
+        <h1
+          class="font-['Bebas_Neue'] text-[34px] sm:text-[48px] md:text-[80px] text-[#e4e1ed] tracking-tighter uppercase leading-none">
+          <span id="tw-text">TU NEGOCIO EN<br />MODO AUTOMÁTICO</span><span class="tw-cursor"></span>
+        </h1>
+        <p class="font-['DM_Sans'] text-sm sm:text-lg text-[#ccc3d7] max-w-2xl leading-relaxed">
+          Automatización con IA · Webs que convierten · Marketing que escala.<br />
+          Mientras tú duermes, tu negocio trabaja.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <a href="#servicios"
+            class="px-8 py-4 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(109,40,217,0.4)]">Ver
+            servicios</a>
+          <button id="open-contact"
+            class="px-8 py-4 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Hablar
+            con nosotros</button>
+        </div>
+      </div>
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 z-20">
+        <span class="font-['DM_Sans'] text-[10px] text-[#ccc3d7] uppercase tracking-widest">Scroll</span>
+        <div class="w-px h-12 bg-gradient-to-b from-[#6d28d9] to-transparent animate-bounce"></div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-10 md:mb-20 fade">
+          <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase tracking-tight">Tu
+            competencia ya está automatizada. ¿Tú?</h2>
+          <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Sistemas diseñados para operar sin
+            fricción, liberando tu tiempo para enfocarte en el crecimiento real.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade">
+            <div class="h-48 overflow-hidden relative"><img alt="Automatización IA"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="img/card-ai.jpg" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div>
+            </div>
+            <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
+              <div
+                class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">
+                <span class="material-symbols-outlined text-[#6d28d9]">smart_toy</span></div>
+              <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Automatización IA</h3>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Conectamos tus herramientas.
+                Eliminamos tareas repetitivas. Desde flujos de emails hasta gestión de CRM sin intervención humana.</p>
+              <a href="#"
+                class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Explorar
+                flujos <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+            </div>
           </div>
-          <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Selecciona un servicio.</span>
+          <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade"
+            style="transition-delay:.1s">
+            <div class="h-48 overflow-hidden relative"><img alt="Desarrollo Web"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="img/card-web.jpg" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div>
+            </div>
+            <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
+              <div
+                class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">
+                <span class="material-symbols-outlined text-[#6d28d9]">code</span></div>
+              <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Desarrollo Web</h3>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Arquitectura digital de alto
+                rendimiento. Sitios rápidos, oscuros y optimizados obsesivamente para la conversión.</p>
+              <a href="#"
+                class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Ver
+                portafolio <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+            </div>
+          </div>
+          <div class="bg-[#1b1b23] border border-[#6d28d9]/30 rounded-xl flex flex-col overflow-hidden group glow fade"
+            style="transition-delay:.2s">
+            <div class="h-48 overflow-hidden relative"><img alt="Marketing Digital"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                src="img/card-mkt.jpg" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#1b1b23]"></div>
+            </div>
+            <div class="p-5 md:p-8 flex flex-col flex-grow -mt-12 relative z-10">
+              <div
+                class="w-14 h-14 bg-[#1f1f28] border border-[#6d28d9] clip-hex flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">
+                <span class="material-symbols-outlined text-[#6d28d9]">rocket_launch</span></div>
+              <h3 class="font-['Bebas_Neue'] text-2xl uppercase text-[#e4e1ed] mb-4">Marketing Digital</h3>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7] flex-grow mb-8">Estrategias basadas en datos.
+                Adquisición predecible de clientes a través de embudos hiper-optimizados.</p>
+              <a href="#"
+                class="inline-flex items-center gap-2 font-['DM_Sans'] text-sm font-bold text-[#6d28d9] hover:text-[#d3bbff] transition-colors">Conocer
+                método <span class="material-symbols-outlined text-base">arrow_forward</span></a>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Fila 3: Mensaje -->
-      <div class="flex flex-col gap-1.5">
-        <label for="cf-message" class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Tu consulta <span class="text-[#6d28d9]">*</span></label>
-        <textarea id="cf-message" rows="5" placeholder="Describe tu proyecto, objetivo o pregunta…"
-          class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors resize-y placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]"></textarea>
-        <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Este campo es obligatorio.</span>
+    <!-- IMPACTO -->
+    <section id="impacto" class="w-full bg-[#6d28d9] py-16 md:py-24 px-4 md:px-16">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center text-white fade">
+          <div>
+            <div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span
+                class="counter" data-target="98">0</span><span>%</span></div>
+            <p
+              class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">
+              Retención</p>
+          </div>
+          <div>
+            <div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1"><span
+                class="counter" data-target="24">0</span><span>/7</span></div>
+            <p
+              class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">
+              Soporte IA</p>
+          </div>
+          <div>
+            <div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1">
+              <span>+</span><span class="counter" data-target="500">0</span></div>
+            <p
+              class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">
+              Horas/mes</p>
+          </div>
+          <div>
+            <div class="font-['Bebas_Neue'] text-4xl md:text-5xl flex justify-center items-end gap-1">
+              <span>x</span><span class="counter" data-target="3">0</span></div>
+            <p
+              class="font-['DM_Sans'] text-xs md:text-sm font-bold uppercase tracking-wide md:tracking-widest opacity-80 mt-1">
+              ROI Promedio</p>
+          </div>
+        </div>
+        <div
+          class="mt-16 pt-10 border-t border-white/20 flex flex-wrap justify-center gap-12 opacity-50 hover:opacity-100 transition-opacity duration-500 fade">
+          <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">OpenAI</span>
+          <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Make</span>
+          <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Webflow</span>
+          <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Meta</span>
+          <span class="font-['Bebas_Neue'] text-2xl text-white uppercase">Google</span>
+        </div>
       </div>
+    </section>
 
-      <!-- Footer del form -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[#1c1c2e]">
-        <p class="font-['DM_Sans'] text-xs text-[#ccc3d7]/40">* Obligatorio · Te respondemos en &lt;24 h</p>
-        <button type="submit" id="cf-submit"
-          class="w-full sm:w-auto px-8 py-3.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded hover:scale-[1.03] transition-transform shadow-[0_0_20px_rgba(109,40,217,0.3)] flex items-center justify-center gap-2">
-          Enviar consulta <span class="material-symbols-outlined text-base">send</span>
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810] border-y border-[#4a4455]/30">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-10 md:mb-20 fade">
+          <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Testimonios</h2>
+          <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Lo que dicen los líderes de la
+            industria sobre nuestros sistemas.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-[#1b1b23] p-6 md:p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors">
+            <span
+              class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
+            <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"La implementación de automatizaciones con
+              NexaFlow transformó completamente nuestras operaciones. Redujimos el trabajo manual drásticamente y
+              aceleramos nuestro crecimiento mensual."</p>
+            <div class="flex items-center gap-4">
+              <img alt="Carlos M." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]"
+                src="img/avatar1.jpg" />
+              <div>
+                <h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Carlos M.</h4><span
+                  class="text-sm text-[#ccc3d7]">Director Ejecutivo</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-[#1b1b23] p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors"
+            style="transition-delay:.1s">
+            <span
+              class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
+            <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"Nuestra nueva plataforma digital es
+              impecable. Un diseño oscuro, elegante y optimizada obsesivamente para la conversión. El nivel de detalle
+              es insuperable."</p>
+            <div class="flex items-center gap-4">
+              <img alt="Laura P." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]"
+                src="img/avatar2.jpg" />
+              <div>
+                <h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Laura P.</h4><span
+                  class="text-sm text-[#ccc3d7]">Fundadora &amp; Creativa</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-[#1b1b23] p-8 border border-[#6d28d9]/30 rounded-xl relative fade hover:border-[#6d28d9] transition-colors"
+            style="transition-delay:.2s">
+            <span
+              class="material-symbols-outlined text-4xl text-[#6d28d9] absolute -top-4 -left-2 opacity-50">format_quote</span>
+            <p class="font-['DM_Sans'] text-base text-[#ccc3d7] mb-6 italic">"Las estrategias basadas en datos que
+              implementaron nos dieron un ROI claro y predecible desde el primer mes."</p>
+            <div class="flex items-center gap-4">
+              <img alt="Marcos T." class="w-14 h-14 rounded-full object-cover border-2 border-[#6d28d9]"
+                src="img/avatar3.jpg" />
+              <div>
+                <h4 class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase">Marcos T.</h4><span
+                  class="text-sm text-[#ccc3d7]">CEO Tech Startup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-12 md:mb-24 fade">
+          <h2 class="font-['Bebas_Neue'] text-[32px] text-[#e4e1ed] uppercase">Arquitectura del éxito</h2>
+          <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7] max-w-xl mx-auto">Un proceso metódico. Sin
+            improvisaciones.</p>
+        </div>
+        <div class="relative">
+          <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-[#292932] z-0">
+            <div id="proc-line" class="absolute top-0 left-0 h-full bg-[#6d28d9] w-0 transition-all duration-1000">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 relative z-10">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left fade">
+              <div
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#34343d] border-2 border-[#6d28d9] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#d3bbff] mb-6 shadow-[0_0_15px_rgba(109,40,217,0.3)]">
+                01</div>
+              <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Auditoría Profunda</h4>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Analizamos tus cuellos de botella y mapeamos el flujo
+                de datos exacto.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-start text-center md:text-left fade"
+              style="transition-delay:.1s">
+              <div
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">
+                02</div>
+              <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Diseño del Sistema</h4>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Arquitectamos la solución ideal con las mejores
+                herramientas del stack moderno.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-start text-center md:text-left fade"
+              style="transition-delay:.2s">
+              <div
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">
+                03</div>
+              <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Implementación</h4>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Despliegue silencioso y preciso. Sin interrumpir tus
+                operaciones actuales.</p>
+            </div>
+            <div class="flex flex-col items-center md:items-start text-center md:text-left fade"
+              style="transition-delay:.3s">
+              <div
+                class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1f1f28] border-2 border-[#4a4455] flex items-center justify-center font-['Bebas_Neue'] text-4xl md:text-5xl text-[#ccc3d7] mb-6 hover:border-[#6d28d9] hover:text-[#6d28d9] transition-colors">
+                04</div>
+              <h4 class="font-['Bebas_Neue'] text-xl uppercase text-[#e4e1ed] mb-3">Escalabilidad</h4>
+              <p class="font-['DM_Sans'] text-base text-[#ccc3d7]">Monitoreo continuo y optimización algorítmica para
+                crecimiento infinito.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 md:py-32 px-4 md:px-16 bg-[#1b1b23] border-y border-[#4a4455]/30">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-10 md:mb-16 fade">
+          <h2 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase">Preguntas Frecuentes</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors">
+            <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+              <span
+                class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Cuánto
+                tiempo toma implementar una automatización básica?</span>
+              <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
+            </button>
+            <div class="faq-body px-4 md:px-6">
+              <p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Un flujo inicial de captura y
+                nutrición de leads puede estar operativo en 7 a 14 días laborables tras la auditoría inicial.</p>
+            </div>
+          </div>
+          <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors"
+            style="transition-delay:.05s">
+            <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+              <span
+                class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Necesito
+                conocimientos técnicos previos?</span>
+              <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
+            </button>
+            <div class="faq-body px-4 md:px-6">
+              <p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Absolutamente no. Construimos
+                la infraestructura "bajo el capó" y te entregamos un panel de control intuitivo.</p>
+            </div>
+          </div>
+          <div class="border border-[#4a4455] hover:border-[#6d28d9]/50 bg-[#080810] fade transition-colors"
+            style="transition-delay:.1s">
+            <button class="faq-btn w-full text-left px-4 py-4 md:px-6 md:py-5 flex justify-between items-center group">
+              <span
+                class="font-['Bebas_Neue'] text-base md:text-lg uppercase text-[#e4e1ed] group-hover:text-[#6d28d9] transition-colors pr-3">¿Qué
+                herramientas integráis?</span>
+              <span class="material-symbols-outlined text-[#6d28d9] transition-transform faq-icon">expand_more</span>
+            </button>
+            <div class="faq-body px-4 md:px-6">
+              <p class="font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] pb-5 md:pb-6">Make, Zapier, Webflow,
+                Shopify, HubSpot, APIs custom y modelos como GPT-4 según lo que exija el proyecto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section
+      class="py-20 md:min-h-[600px] flex flex-col justify-center items-center text-center px-4 md:px-16 bg-[#080810] relative overflow-hidden">
+      <div class="absolute inset-0 bg-[#6d28d9]/5 pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col items-center fade">
+        <h2
+          class="font-['Bebas_Neue'] text-[36px] sm:text-[54px] md:text-[112px] leading-none text-[#e4e1ed] uppercase mb-6 md:mb-8">
+          ¿LISTO PARA<br /><span class="text-[#6d28d9] drop-shadow-[0_0_20px_rgba(109,40,217,0.5)]">ESCALAR?</span>
+        </h2>
+        <p class="font-['DM_Sans'] text-lg text-[#ccc3d7] max-w-xl mb-12">Agenda una consulta estratégica gratuita de 30
+          minutos y te diremos exactamente dónde estás perdiendo dinero.</p>
+        <button id="open-contact-cta"
+          class="px-8 py-4 md:px-12 md:py-5 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm md:text-lg font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Consulta
+          Gratis</button>
+      </div>
+    </section>
+
+    <!-- CONSULTAS -->
+    <section id="consultas" class="py-16 md:py-32 px-4 md:px-16 bg-[#080810]">
+      <div class="max-w-3xl mx-auto">
+
+        <div class="text-center mb-10 md:mb-16 fade">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 bg-[#1f1f28] border border-[#6d28d9]/50 rounded-full mb-4">
+            <span class="w-2 h-2 rounded-full bg-[#6d28d9] animate-pulse"></span>
+            <span class="font-['DM_Sans'] text-xs font-bold text-[#d3bbff] uppercase tracking-widest">Atención
+              personalizada</span>
+          </div>
+          <h2 class="font-['Bebas_Neue'] text-[32px] md:text-[48px] text-[#e4e1ed] uppercase">ENVÍANOS TU CONSULTA</h2>
+          <p class="mt-4 font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7] max-w-xl mx-auto">Cuéntanos tu proyecto y
+            te respondemos en menos de 24 horas con una propuesta a medida.</p>
+        </div>
+
+        <form id="consulta-form" class="bg-[#0c0c18] border border-[#1c1c2e] rounded-lg p-6 md:p-10 space-y-6 fade glow"
+          novalidate>
+
+          <!-- Fila 1: Nombre + Email -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-1.5">
+              <label for="cf-name"
+                class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Nombre completo
+                <span class="text-[#6d28d9]">*</span></label>
+              <input id="cf-name" type="text" placeholder="Tu nombre" autocomplete="name"
+                class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
+              <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Este campo es obligatorio.</span>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="cf-email"
+                class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Email <span
+                  class="text-[#6d28d9]">*</span></label>
+              <input id="cf-email" type="email" placeholder="tu@email.com" autocomplete="email"
+                class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
+              <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Introduce un email válido.</span>
+            </div>
+          </div>
+
+          <!-- Fila 2: Teléfono + Servicio -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-1.5">
+              <label for="cf-phone"
+                class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Teléfono <span
+                  class="font-normal normal-case tracking-normal text-[#ccc3d7]/40 text-xs">(opcional)</span></label>
+              <input id="cf-phone" type="tel" placeholder="+34 600 000 000" autocomplete="tel"
+                class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="cf-service"
+                class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Servicio de interés
+                <span class="text-[#6d28d9]">*</span></label>
+              <div class="relative">
+                <select id="cf-service"
+                  class="w-full bg-[#080810] border border-[#1c1c2e] text-[#4a4455] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors appearance-none cursor-pointer hover:border-[#6d28d9]/50 focus:border-[#6d28d9]">
+                  <option value="" disabled selected>Selecciona un servicio…</option>
+                  <option value="Automatización IA">Automatización IA</option>
+                  <option value="Desarrollo Web">Desarrollo Web</option>
+                  <option value="Marketing Digital">Marketing Digital</option>
+                  <option value="Pack Completo">Pack Completo</option>
+                </select>
+                <span
+                  class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#ccc3d7] pointer-events-none text-base">expand_more</span>
+              </div>
+              <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Selecciona un servicio.</span>
+            </div>
+          </div>
+
+          <!-- Fila 3: Mensaje -->
+          <div class="flex flex-col gap-1.5">
+            <label for="cf-message"
+              class="font-['DM_Sans'] text-xs font-bold uppercase tracking-widest text-[#ccc3d7]">Tu consulta <span
+                class="text-[#6d28d9]">*</span></label>
+            <textarea id="cf-message" rows="5" placeholder="Describe tu proyecto, objetivo o pregunta…"
+              class="bg-[#080810] border border-[#1c1c2e] text-[#e4e1ed] font-['DM_Sans'] text-sm rounded px-4 py-3 outline-none transition-colors resize-y placeholder:text-[#4a4455] hover:border-[#6d28d9]/50 focus:border-[#6d28d9]"></textarea>
+            <span class="cf-err hidden font-['DM_Sans'] text-xs text-[#ffb4ab]">Este campo es obligatorio.</span>
+          </div>
+
+          <!-- Footer del form -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[#1c1c2e]">
+            <p class="font-['DM_Sans'] text-xs text-[#ccc3d7]/40">* Obligatorio · Te respondemos en &lt;24 h</p>
+            <button type="submit" id="cf-submit"
+              class="w-full sm:w-auto px-8 py-3.5 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded hover:scale-[1.03] transition-transform shadow-[0_0_20px_rgba(109,40,217,0.3)] flex items-center justify-center gap-2">
+              Enviar consulta <span class="material-symbols-outlined text-base">send</span>
+            </button>
+          </div>
+
+          <!-- Éxito -->
+          <div id="cf-success"
+            class="hidden p-4 bg-[#1f1f28] border border-[#6d28d9]/50 rounded flex items-start gap-3">
+            <span class="material-symbols-outlined text-[#6d28d9] mt-0.5"
+              style="font-variation-settings:'FILL' 1">check_circle</span>
+            <div>
+              <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">¡Consulta enviada!</p>
+              <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] mt-1">Se ha abierto Gmail con tu mensaje. Envíalo y te
+                contactamos en menos de 24 h.</p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto-section" class="py-16 md:py-24 px-4 md:px-16 bg-[#080810]">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10 md:mb-16 fade">
+          <h2 class="font-['Bebas_Neue'] text-[36px] md:text-[48px] text-[#e4e1ed] uppercase">CONTACTO</h2>
+          <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7]">Conecta con nosotros para empezar a escalar tu
+            negocio.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank"
+            class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+            <span
+              class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">mail</span>
+            <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Gmail</span>
+            <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">yosoynexaflow@gmail.com</span>
+          </a>
+          <a href="https://wa.me/34651104555" target="_blank"
+            class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+            <svg class="w-10 h-10 text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4" viewBox="0 0 24 24"
+              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span
+              class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">WhatsApp</span>
+            <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">+34 651 10 45 55</span>
+          </a>
+          <a href="https://instagram.com/nexaflow_ia" target="_blank"
+            class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+            <span
+              class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">alternate_email</span>
+            <span
+              class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Instagram</span>
+            <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@nexaflow_ia</span>
+          </a>
+          <a href="https://instagram.com/javigonzaaalez_" target="_blank"
+            class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
+            <span
+              class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">person</span>
+            <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">CEO
+              Instagram</span>
+            <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@javigonzaaalez_</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-10 md:py-16 px-4 md:px-16 bg-[#080810] border-t border-[#4a4455]/30">
+    <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="font-['Bebas_Neue'] text-3xl text-[#6d28d9]">NEXAFLOW</div>
+      <div class="flex gap-6 flex-wrap justify-center">
+        <a href="#"
+          class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Privacidad</a>
+        <button id="open-terms"
+          class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Términos y
+          Condiciones</button>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank"
+          class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">yosoynexaflow@gmail.com</a>
+        <a href="https://instagram.com/nexaflow_ia" target="_blank"
+          class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">@nexaflow_ia</a>
+      </div>
+      <div class="text-center">
+        <p class="font-['DM_Sans'] text-sm text-[#ccc3d7]">© 2024 NEXAFLOW. TODOS LOS DERECHOS RESERVADOS.</p>
+        <p class="font-['DM_Sans'] text-sm text-[#ccc3d7]/60 mt-1">CEO: <a href="https://instagram.com/javigonzaaalez_"
+            target="_blank" class="hover:text-[#6d28d9] transition-colors">@javigonzaaalez_</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL CONTACTO -->
+  <div id="contact-modal"
+    class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/90 backdrop-blur-sm p-4">
+    <div class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl w-full max-w-lg shadow-2xl">
+
+      <!-- Cabecera -->
+      <div class="border-b border-[#1c1c2e] px-6 py-5 flex justify-between items-start">
+        <div>
+          <h3 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase leading-none">¿Cómo quieres
+            contactarnos?</h3>
+          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] mt-1">Elige el canal que prefieras</p>
+        </div>
+        <button id="close-contact"
+          class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors ml-4 mt-0.5 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">close</span>
         </button>
       </div>
 
-      <!-- Éxito -->
-      <div id="cf-success" class="hidden p-4 bg-[#1f1f28] border border-[#6d28d9]/50 rounded flex items-start gap-3">
-        <span class="material-symbols-outlined text-[#6d28d9] mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span>
+      <!-- Opciones -->
+      <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/34651104555" target="_blank"
+          class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+          <div
+            class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+            <svg class="w-5 h-5 text-[#6d28d9]" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">WhatsApp</p>
+            <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">+34 651 10 45 55</p>
+          </div>
+          <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+        </a>
+
+        <!-- Gmail -->
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank"
+          class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+          <div
+            class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+            <span class="material-symbols-outlined text-[#6d28d9] text-xl">mail</span>
+          </div>
+          <div class="min-w-0">
+            <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Gmail</p>
+            <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">yosoynexaflow@gmail.com</p>
+          </div>
+          <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+        </a>
+
+        <!-- Instagram NexaFlow -->
+        <a href="https://instagram.com/nexaflow_ia" target="_blank"
+          class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+          <div
+            class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+            <span class="material-symbols-outlined text-[#6d28d9] text-xl">alternate_email</span>
+          </div>
+          <div class="min-w-0">
+            <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Instagram</p>
+            <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@nexaflow_ia</p>
+          </div>
+          <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+        </a>
+
+        <!-- Instagram Personal — MÁXIMA URGENCIA -->
+        <a href="https://instagram.com/javigonzaaalez_" target="_blank"
+          class="relative flex items-center gap-4 p-4 bg-[#080810] border border-[#6d28d9]/60 rounded hover:border-[#6d28d9] transition-colors group shadow-[0_0_18px_rgba(109,40,217,0.15)]">
+          <span
+            class="absolute -top-3 left-3 px-2 py-0.5 bg-[#6d28d9] font-['DM_Sans'] text-[10px] font-bold uppercase tracking-widest text-white rounded-sm">Máxima
+            urgencia</span>
+          <div
+            class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9] rounded flex items-center justify-center shadow-[0_0_10px_rgba(109,40,217,0.3)]">
+            <span class="material-symbols-outlined text-[#6d28d9] text-xl"
+              style="font-variation-settings:'FILL' 1">person</span>
+          </div>
+          <div class="min-w-0">
+            <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">CEO directo</p>
+            <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@javigonzaaalez_</p>
+          </div>
+          <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TÉRMINOS -->
+  <div id="terms-modal"
+    class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/80 backdrop-blur-sm p-4">
+    <div
+      class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl max-w-3xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+      <div class="sticky top-0 bg-[#0c0c18] border-b border-[#1c1c2e] p-6 flex justify-between items-center">
+        <h3 class="font-['Bebas_Neue'] text-3xl text-[#e4e1ed] uppercase">Términos y Condiciones</h3>
+        <button id="close-terms" class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors"><span
+            class="material-symbols-outlined text-2xl">close</span></button>
+      </div>
+      <div class="p-5 md:p-8 space-y-5 md:space-y-6 font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7]">
         <div>
-          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed]">¡Consulta enviada!</p>
-          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] mt-1">Se ha abierto Gmail con tu mensaje. Envíalo y te contactamos en menos de 24 h.</p>
+          <h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">1. Aceptación</h4>
+          <p>Al acceder a los servicios de NexaFlow, el usuario acepta estos Términos y Condiciones.</p>
+        </div>
+        <div>
+          <h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">2. Servicios</h4>
+          <p>NexaFlow provee automatización con IA, desarrollo web y estrategias de marketing digital.</p>
+        </div>
+        <div>
+          <h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">3. Propiedad Intelectual</h4>
+          <p>Código, flujos y metodologías desarrolladas son propiedad de NexaFlow salvo acuerdo escrito.</p>
+        </div>
+        <div>
+          <h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">4. Confidencialidad</h4>
+          <p>Mantenemos estricta confidencialidad sobre la información compartida por nuestros clientes.</p>
+        </div>
+        <div>
+          <h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">5. Limitación de Responsabilidad</h4>
+          <p>No somos responsables de fallos originados en APIs de terceros como OpenAI, Make o Meta.</p>
         </div>
       </div>
-
-    </form>
-  </div>
-</section>
-
-<!-- CONTACTO -->
-<section id="contacto-section" class="py-16 md:py-24 px-4 md:px-16 bg-[#080810]">
-  <div class="max-w-4xl mx-auto">
-    <div class="text-center mb-10 md:mb-16 fade">
-      <h2 class="font-['Bebas_Neue'] text-[36px] md:text-[48px] text-[#e4e1ed] uppercase">CONTACTO</h2>
-      <p class="mt-4 font-['DM_Sans'] text-base text-[#ccc3d7]">Conecta con nosotros para empezar a escalar tu negocio.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade">
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
-        <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">mail</span>
-        <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Gmail</span>
-        <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">yosoynexaflow@gmail.com</span>
-      </a>
-      <a href="https://wa.me/34651104555" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
-        <svg class="w-10 h-10 text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">WhatsApp</span>
-        <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">+34 651 10 45 55</span>
-      </a>
-      <a href="https://instagram.com/nexaflow_ia" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
-        <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">alternate_email</span>
-        <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">Instagram</span>
-        <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@nexaflow_ia</span>
-      </a>
-      <a href="https://instagram.com/javigonzaaalez_" target="_blank" class="flex flex-col items-center p-5 md:p-8 bg-[#0c0c18] border border-[#1c1c2e] rounded-xl hover:border-[#6d28d9] transition-colors group">
-        <span class="material-symbols-outlined text-4xl text-[#ccc3d7] group-hover:text-[#6d28d9] transition-colors mb-4">person</span>
-        <span class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest mb-2">CEO Instagram</span>
-        <span class="font-['DM_Sans'] text-base text-[#ccc3d7]">@javigonzaaalez_</span>
-      </a>
     </div>
   </div>
-</section>
-</main>
 
-<!-- FOOTER -->
-<footer class="py-10 md:py-16 px-4 md:px-16 bg-[#080810] border-t border-[#4a4455]/30">
-  <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-    <div class="font-['Bebas_Neue'] text-3xl text-[#6d28d9]">NEXAFLOW</div>
-    <div class="flex gap-6 flex-wrap justify-center">
-      <a href="#" class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Privacidad</a>
-      <button id="open-terms" class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">Términos y Condiciones</button>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">yosoynexaflow@gmail.com</a>
-      <a href="https://instagram.com/nexaflow_ia" target="_blank" class="font-['DM_Sans'] text-sm text-[#ccc3d7] hover:text-[#6d28d9] transition-colors">@nexaflow_ia</a>
-    </div>
-    <div class="text-center">
-      <p class="font-['DM_Sans'] text-sm text-[#ccc3d7]">© 2024 NEXAFLOW. TODOS LOS DERECHOS RESERVADOS.</p>
-      <p class="font-['DM_Sans'] text-sm text-[#ccc3d7]/60 mt-1">CEO: <a href="https://instagram.com/javigonzaaalez_" target="_blank" class="hover:text-[#6d28d9] transition-colors">@javigonzaaalez_</a></p>
-    </div>
-  </div>
-</footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-<!-- MODAL CONTACTO -->
-<div id="contact-modal" class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/90 backdrop-blur-sm p-4">
-  <div class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl w-full max-w-lg shadow-2xl">
+      // Cursor
+      const cd = document.getElementById('cd'), cr = document.getElementById('cr');
+      let mx = innerWidth / 2, my = innerHeight / 2, dx = mx, dy = my, rx = mx, ry = my;
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      if (innerWidth > 768) {
+        (function loop() {
+          dx += (mx - dx) * .5; dy += (my - dy) * .5;
+          rx += (mx - rx) * .12; ry += (my - ry) * .12;
+          cd.style.left = dx + 'px'; cd.style.top = dy + 'px';
+          cr.style.left = rx + 'px'; cr.style.top = ry + 'px';
+          requestAnimationFrame(loop);
+        })();
+      } else {
+        cd.style.display = cr.style.display = 'none';
+        document.body.style.cursor = 'auto';
+      }
 
-    <!-- Cabecera -->
-    <div class="border-b border-[#1c1c2e] px-6 py-5 flex justify-between items-start">
-      <div>
-        <h3 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase leading-none">¿Cómo quieres contactarnos?</h3>
-        <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] mt-1">Elige el canal que prefieras</p>
-      </div>
-      <button id="close-contact" class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors ml-4 mt-0.5 flex-shrink-0">
-        <span class="material-symbols-outlined text-2xl">close</span>
-      </button>
-    </div>
+      // Typewriter
+      const tw = document.getElementById('tw-text');
+      const txt = "TU NEGOCIO EN\nMODO AUTOMÁTICO";
+      tw.innerHTML = ''; let i = 0;
+      setTimeout(function type() {
+        if (i < txt.length) {
+          tw.innerHTML += txt[i] === '\n' ? '<br>' : txt[i];
+          i++; setTimeout(type, 75);
+        }
+      }, 300);
 
-    <!-- Opciones -->
-    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      // Scroll reveal
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('on');
+            if (e.target.closest('#impacto')) runCounters();
+            if (e.target.closest('#proceso')) document.getElementById('proc-line').style.width = '100%';
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade').forEach(el => io.observe(el));
 
-      <!-- WhatsApp -->
-      <a href="https://wa.me/34651104555" target="_blank"
-         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
-        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
-          <svg class="w-5 h-5 text-[#6d28d9]" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-        </div>
-        <div class="min-w-0">
-          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">WhatsApp</p>
-          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">+34 651 10 45 55</p>
-        </div>
-        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
-      </a>
+      // Counters
+      let counted = false;
+      function runCounters() {
+        if (counted) return; counted = true;
+        document.querySelectorAll('.counter').forEach(el => {
+          const target = +el.dataset.target, dur = 1800, fps = 60;
+          let f = 0, total = Math.round(dur / (1000 / fps));
+          const t = setInterval(() => {
+            f++; el.textContent = Math.round((f / total) * target);
+            if (f >= total) { el.textContent = target; clearInterval(t); }
+          }, 1000 / fps);
+        });
+      }
 
-      <!-- Gmail -->
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank"
-         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
-        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
-          <span class="material-symbols-outlined text-[#6d28d9] text-xl">mail</span>
-        </div>
-        <div class="min-w-0">
-          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Gmail</p>
-          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">yosoynexaflow@gmail.com</p>
-        </div>
-        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
-      </a>
+      // FAQ
+      document.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const body = btn.nextElementSibling;
+          const icon = btn.querySelector('.faq-icon');
+          const open = body.style.maxHeight && body.style.maxHeight !== '0px';
+          document.querySelectorAll('.faq-body').forEach(b => b.style.maxHeight = '0px');
+          document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+          if (!open) { body.style.maxHeight = body.scrollHeight + 'px'; icon.style.transform = 'rotate(180deg)'; }
+        });
+      });
 
-      <!-- Instagram NexaFlow -->
-      <a href="https://instagram.com/nexaflow_ia" target="_blank"
-         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
-        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
-          <span class="material-symbols-outlined text-[#6d28d9] text-xl">alternate_email</span>
-        </div>
-        <div class="min-w-0">
-          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Instagram</p>
-          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@nexaflow_ia</p>
-        </div>
-        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
-      </a>
+      // Modal Términos
+      const modal = document.getElementById('terms-modal');
+      document.getElementById('open-terms').onclick = () => modal.classList.add('open');
+      document.getElementById('close-terms').onclick = () => modal.classList.remove('open');
+      modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
 
-      <!-- Instagram Personal — MÁXIMA URGENCIA -->
-      <a href="https://instagram.com/javigonzaaalez_" target="_blank"
-         class="relative flex items-center gap-4 p-4 bg-[#080810] border border-[#6d28d9]/60 rounded hover:border-[#6d28d9] transition-colors group shadow-[0_0_18px_rgba(109,40,217,0.15)]">
-        <span class="absolute -top-3 left-3 px-2 py-0.5 bg-[#6d28d9] font-['DM_Sans'] text-[10px] font-bold uppercase tracking-widest text-white rounded-sm">Máxima urgencia</span>
-        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9] rounded flex items-center justify-center shadow-[0_0_10px_rgba(109,40,217,0.3)]">
-          <span class="material-symbols-outlined text-[#6d28d9] text-xl" style="font-variation-settings:'FILL' 1">person</span>
-        </div>
-        <div class="min-w-0">
-          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">CEO directo</p>
-          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@javigonzaaalez_</p>
-        </div>
-        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
-      </a>
+      // Modal Contacto
+      const contactModal = document.getElementById('contact-modal');
+      ['open-contact', 'open-contact-nav', 'open-contact-mob', 'open-contact-cta'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = () => contactModal.classList.add('open');
+      });
+      document.getElementById('close-contact').onclick = () => contactModal.classList.remove('open');
+      contactModal.addEventListener('click', e => { if (e.target === contactModal) contactModal.classList.remove('open'); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') contactModal.classList.remove('open'); });
 
-    </div>
-  </div>
-</div>
+      // Mobile menu
+      const nav = document.getElementById('mobile-nav'), icon = document.getElementById('mob-icon');
+      document.getElementById('mob-btn').onclick = () => {
+        const o = nav.classList.toggle('open');
+        icon.textContent = o ? 'close' : 'menu';
+      };
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); icon.textContent = 'menu'; }));
 
-<!-- MODAL TÉRMINOS -->
-<div id="terms-modal" class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/80 backdrop-blur-sm p-4">
-  <div class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl max-w-3xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-    <div class="sticky top-0 bg-[#0c0c18] border-b border-[#1c1c2e] p-6 flex justify-between items-center">
-      <h3 class="font-['Bebas_Neue'] text-3xl text-[#e4e1ed] uppercase">Términos y Condiciones</h3>
-      <button id="close-terms" class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors"><span class="material-symbols-outlined text-2xl">close</span></button>
-    </div>
-    <div class="p-5 md:p-8 space-y-5 md:space-y-6 font-['DM_Sans'] text-sm md:text-base text-[#ccc3d7]">
-      <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">1. Aceptación</h4><p>Al acceder a los servicios de NexaFlow, el usuario acepta estos Términos y Condiciones.</p></div>
-      <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">2. Servicios</h4><p>NexaFlow provee automatización con IA, desarrollo web y estrategias de marketing digital.</p></div>
-      <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">3. Propiedad Intelectual</h4><p>Código, flujos y metodologías desarrolladas son propiedad de NexaFlow salvo acuerdo escrito.</p></div>
-      <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">4. Confidencialidad</h4><p>Mantenemos estricta confidencialidad sobre la información compartida por nuestros clientes.</p></div>
-      <div><h4 class="font-['Bebas_Neue'] text-2xl text-[#6d28d9] uppercase mb-2">5. Limitación de Responsabilidad</h4><p>No somos responsables de fallos originados en APIs de terceros como OpenAI, Make o Meta.</p></div>
-    </div>
-  </div>
-</div>
+      // Navbar scroll
+      window.addEventListener('scroll', () => {
+        document.getElementById('navbar').style.backgroundColor = scrollY > 50 ? 'rgba(8,8,16,.97)' : 'rgba(8,8,16,.8)';
+      });
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+      // Select placeholder color
+      const cfService = document.getElementById('cf-service');
+      if (cfService) {
+        cfService.addEventListener('change', function () {
+          this.style.color = this.value ? '#e4e1ed' : '#4a4455';
+        });
+      }
 
-  // Cursor
-  const cd = document.getElementById('cd'), cr = document.getElementById('cr');
-  let mx = innerWidth/2, my = innerHeight/2, dx = mx, dy = my, rx = mx, ry = my;
-  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  if (innerWidth > 768) {
-    (function loop() {
-      dx += (mx-dx)*.5; dy += (my-dy)*.5;
-      rx += (mx-rx)*.12; ry += (my-ry)*.12;
-      cd.style.left = dx+'px'; cd.style.top = dy+'px';
-      cr.style.left = rx+'px'; cr.style.top = ry+'px';
-      requestAnimationFrame(loop);
-    })();
-  } else {
-    cd.style.display = cr.style.display = 'none';
-    document.body.style.cursor = 'auto';
-  }
+      // Consulta Form
+      const cForm = document.getElementById('consulta-form');
+      if (cForm) {
+        function cfValidate(id, testFn) {
+          const el = document.getElementById(id);
+          const errEl = el.closest('.flex.flex-col').querySelector('.cf-err');
+          const valid = testFn(el.value);
+          el.style.borderColor = valid ? '' : '#93000a';
+          if (errEl) errEl.classList.toggle('hidden', valid);
+          return valid;
+        }
 
-  // Typewriter
-  const tw = document.getElementById('tw-text');
-  const txt = "TU NEGOCIO EN\nMODO AUTOMÁTICO";
-  tw.innerHTML = ''; let i = 0;
-  setTimeout(function type() {
-    if (i < txt.length) {
-      tw.innerHTML += txt[i] === '\n' ? '<br>' : txt[i];
-      i++; setTimeout(type, 75);
-    }
-  }, 300);
+        cForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const ok = [
+            cfValidate('cf-name', v => v.trim().length > 0),
+            cfValidate('cf-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)),
+            cfValidate('cf-service', v => v !== ''),
+            cfValidate('cf-message', v => v.trim().length > 0)
+          ].every(Boolean);
 
-  // Scroll reveal
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('on');
-        if (e.target.closest('#impacto')) runCounters();
-        if (e.target.closest('#proceso')) document.getElementById('proc-line').style.width = '100%';
-        io.unobserve(e.target);
+          if (!ok) return;
+
+          const name = document.getElementById('cf-name').value;
+          const email = document.getElementById('cf-email').value;
+          const phone = document.getElementById('cf-phone').value || 'No indicado';
+          const svc = document.getElementById('cf-service');
+          const svcText = svc.options[svc.selectedIndex].text;
+          const msg = document.getElementById('cf-message').value;
+
+          const subject = encodeURIComponent('Consulta NexaFlow — ' + svcText);
+          const body = encodeURIComponent(
+            'Nombre: ' + name + '\n' +
+            'Email: ' + email + '\n' +
+            'Teléfono: ' + phone + '\n' +
+            'Servicio: ' + svcText + '\n\n' +
+            'Mensaje:\n' + msg
+          );
+          window.open(
+            'https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com&su=' + subject + '&body=' + body,
+            '_blank'
+          );
+
+          const btn = document.getElementById('cf-submit');
+          btn.disabled = true;
+          btn.style.opacity = '0.5';
+          cForm.querySelectorAll('input,select,textarea').forEach(function (el) {
+            el.value = ''; el.style.borderColor = '';
+          });
+          if (cfService) cfService.style.color = '#4a4455';
+          document.getElementById('cf-success').classList.remove('hidden');
+        });
       }
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade').forEach(el => io.observe(el));
-
-  // Counters
-  let counted = false;
-  function runCounters() {
-    if (counted) return; counted = true;
-    document.querySelectorAll('.counter').forEach(el => {
-      const target = +el.dataset.target, dur = 1800, fps = 60;
-      let f = 0, total = Math.round(dur/(1000/fps));
-      const t = setInterval(() => {
-        f++; el.textContent = Math.round((f/total)*target);
-        if (f >= total) { el.textContent = target; clearInterval(t); }
-      }, 1000/fps);
-    });
-  }
-
-  // FAQ
-  document.querySelectorAll('.faq-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const body = btn.nextElementSibling;
-      const icon = btn.querySelector('.faq-icon');
-      const open = body.style.maxHeight && body.style.maxHeight !== '0px';
-      document.querySelectorAll('.faq-body').forEach(b => b.style.maxHeight = '0px');
-      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
-      if (!open) { body.style.maxHeight = body.scrollHeight + 'px'; icon.style.transform = 'rotate(180deg)'; }
-    });
-  });
-
-  // Modal Términos
-  const modal = document.getElementById('terms-modal');
-  document.getElementById('open-terms').onclick = () => modal.classList.add('open');
-  document.getElementById('close-terms').onclick = () => modal.classList.remove('open');
-  modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
-
-  // Modal Contacto
-  const contactModal = document.getElementById('contact-modal');
-  document.getElementById('open-contact').onclick = () => contactModal.classList.add('open');
-  document.getElementById('close-contact').onclick = () => contactModal.classList.remove('open');
-  contactModal.addEventListener('click', e => { if (e.target === contactModal) contactModal.classList.remove('open'); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') contactModal.classList.remove('open'); });
-
-  // Mobile menu
-  const nav = document.getElementById('mobile-nav'), icon = document.getElementById('mob-icon');
-  document.getElementById('mob-btn').onclick = () => {
-    const o = nav.classList.toggle('open');
-    icon.textContent = o ? 'close' : 'menu';
-  };
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); icon.textContent = 'menu'; }));
-
-  // Navbar scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').style.backgroundColor = scrollY > 50 ? 'rgba(8,8,16,.97)' : 'rgba(8,8,16,.8)';
-  });
-
-  // Select placeholder color
-  const cfService = document.getElementById('cf-service');
-  if (cfService) {
-    cfService.addEventListener('change', function() {
-      this.style.color = this.value ? '#e4e1ed' : '#4a4455';
-    });
-  }
-
-  // Consulta Form
-  const cForm = document.getElementById('consulta-form');
-  if (cForm) {
-    function cfValidate(id, testFn) {
-      const el = document.getElementById(id);
-      const errEl = el.closest('.flex.flex-col').querySelector('.cf-err');
-      const valid = testFn(el.value);
-      el.style.borderColor = valid ? '' : '#93000a';
-      if (errEl) errEl.classList.toggle('hidden', valid);
-      return valid;
-    }
-
-    cForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const ok = [
-        cfValidate('cf-name',    v => v.trim().length > 0),
-        cfValidate('cf-email',   v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)),
-        cfValidate('cf-service', v => v !== ''),
-        cfValidate('cf-message', v => v.trim().length > 0)
-      ].every(Boolean);
-
-      if (!ok) return;
-
-      const name    = document.getElementById('cf-name').value;
-      const email   = document.getElementById('cf-email').value;
-      const phone   = document.getElementById('cf-phone').value || 'No indicado';
-      const svc     = document.getElementById('cf-service');
-      const svcText = svc.options[svc.selectedIndex].text;
-      const msg     = document.getElementById('cf-message').value;
-
-      const subject = encodeURIComponent('Consulta NexaFlow — ' + svcText);
-      const body    = encodeURIComponent(
-        'Nombre: '   + name    + '\n' +
-        'Email: '    + email   + '\n' +
-        'Teléfono: ' + phone   + '\n' +
-        'Servicio: ' + svcText + '\n\n' +
-        'Mensaje:\n' + msg
-      );
-      window.open(
-        'https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com&su=' + subject + '&body=' + body,
-        '_blank'
-      );
-
-      const btn = document.getElementById('cf-submit');
-      btn.disabled = true;
-      btn.style.opacity = '0.5';
-      cForm.querySelectorAll('input,select,textarea').forEach(function(el) {
-        el.value = ''; el.style.borderColor = '';
-      });
-      if (cfService) cfService.style.color = '#4a4455';
-      document.getElementById('cf-success').classList.remove('hidden');
-    });
-  }
-});
-</script>
+  </script>
 </body>
+
 </html>
