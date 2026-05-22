@@ -112,7 +112,7 @@ tailwind.config = {
     </p>
     <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
       <a href="#servicios" class="px-8 py-4 bg-[#6d28d9] text-white font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:scale-105 transition-transform shadow-[0_0_20px_rgba(109,40,217,0.4)]">Ver servicios</a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank" class="px-8 py-4 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Hablar con nosotros</a>
+      <button id="open-contact" class="px-8 py-4 border-2 border-[#6d28d9] text-[#d3bbff] font-['DM_Sans'] text-sm font-bold uppercase tracking-widest rounded text-center hover:bg-[#6d28d9] hover:text-white transition-colors">Hablar con nosotros</button>
     </div>
   </div>
   <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 z-20">
@@ -433,6 +433,83 @@ tailwind.config = {
   </div>
 </footer>
 
+<!-- MODAL CONTACTO -->
+<div id="contact-modal" class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/90 backdrop-blur-sm p-4">
+  <div class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl w-full max-w-lg shadow-2xl">
+
+    <!-- Cabecera -->
+    <div class="border-b border-[#1c1c2e] px-6 py-5 flex justify-between items-start">
+      <div>
+        <h3 class="font-['Bebas_Neue'] text-[28px] md:text-[32px] text-[#e4e1ed] uppercase leading-none">¿Cómo quieres contactarnos?</h3>
+        <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] mt-1">Elige el canal que prefieras</p>
+      </div>
+      <button id="close-contact" class="text-[#ccc3d7] hover:text-[#6d28d9] transition-colors ml-4 mt-0.5 flex-shrink-0">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+
+    <!-- Opciones -->
+    <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/34651104555" target="_blank"
+         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+          <svg class="w-5 h-5 text-[#6d28d9]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">WhatsApp</p>
+          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">+34 651 10 45 55</p>
+        </div>
+        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+      </a>
+
+      <!-- Gmail -->
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yosoynexaflow@gmail.com" target="_blank"
+         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+          <span class="material-symbols-outlined text-[#6d28d9] text-xl">mail</span>
+        </div>
+        <div class="min-w-0">
+          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Gmail</p>
+          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">yosoynexaflow@gmail.com</p>
+        </div>
+        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+      </a>
+
+      <!-- Instagram NexaFlow -->
+      <a href="https://instagram.com/nexaflow_ia" target="_blank"
+         class="flex items-center gap-4 p-4 bg-[#080810] border border-[#1c1c2e] rounded hover:border-[#6d28d9] transition-colors group">
+        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9]/30 rounded flex items-center justify-center group-hover:border-[#6d28d9] transition-colors">
+          <span class="material-symbols-outlined text-[#6d28d9] text-xl">alternate_email</span>
+        </div>
+        <div class="min-w-0">
+          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">Instagram</p>
+          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@nexaflow_ia</p>
+        </div>
+        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+      </a>
+
+      <!-- Instagram Personal — MÁXIMA URGENCIA -->
+      <a href="https://instagram.com/javigonzaaalez_" target="_blank"
+         class="relative flex items-center gap-4 p-4 bg-[#080810] border border-[#6d28d9]/60 rounded hover:border-[#6d28d9] transition-colors group shadow-[0_0_18px_rgba(109,40,217,0.15)]">
+        <span class="absolute -top-3 left-3 px-2 py-0.5 bg-[#6d28d9] font-['DM_Sans'] text-[10px] font-bold uppercase tracking-widest text-white rounded-sm">Máxima urgencia</span>
+        <div class="w-11 h-11 flex-shrink-0 bg-[#1f1f28] border border-[#6d28d9] rounded flex items-center justify-center shadow-[0_0_10px_rgba(109,40,217,0.3)]">
+          <span class="material-symbols-outlined text-[#6d28d9] text-xl" style="font-variation-settings:'FILL' 1">person</span>
+        </div>
+        <div class="min-w-0">
+          <p class="font-['DM_Sans'] text-sm font-bold text-[#e4e1ed] uppercase tracking-widest">CEO directo</p>
+          <p class="font-['DM_Sans'] text-xs text-[#ccc3d7] truncate">@javigonzaaalez_</p>
+        </div>
+        <span class="material-symbols-outlined text-[#6d28d9] ml-auto text-base flex-shrink-0">arrow_forward</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
 <!-- MODAL TÉRMINOS -->
 <div id="terms-modal" class="modal-wrap fixed inset-0 z-[100] flex items-center justify-center bg-[#080810]/80 backdrop-blur-sm p-4">
   <div class="modal-box bg-[#0c0c18] border border-[#1c1c2e] rounded-xl max-w-3xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
@@ -520,11 +597,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal
+  // Modal Términos
   const modal = document.getElementById('terms-modal');
   document.getElementById('open-terms').onclick = () => modal.classList.add('open');
   document.getElementById('close-terms').onclick = () => modal.classList.remove('open');
   modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+  // Modal Contacto
+  const contactModal = document.getElementById('contact-modal');
+  document.getElementById('open-contact').onclick = () => contactModal.classList.add('open');
+  document.getElementById('close-contact').onclick = () => contactModal.classList.remove('open');
+  contactModal.addEventListener('click', e => { if (e.target === contactModal) contactModal.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') contactModal.classList.remove('open'); });
 
   // Mobile menu
   const nav = document.getElementById('mobile-nav'), icon = document.getElementById('mob-icon');
